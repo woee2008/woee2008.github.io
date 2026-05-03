@@ -12,3 +12,8 @@ body.dark-mode {
 ul {
   list-style-type: none;
 }
+
+.layout {
+    display: grid;
+    grid-area: ""
+}

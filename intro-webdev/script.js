@@ -14,3 +14,16 @@ toggleButton.addEventListener('click', () => {
         toggleButton.textContent = 'Dark Mode';
     }
 });
+
+const dog = {
+  name: "Luna",
+  age: 10,
+  breed: "Havanese",
+  location: {
+    city: "Seattle",
+    state: "WA",
+  },
+};
+
+const el = document.getElementById("code-block");
+el.innerText = JSON.stringify(dog, undefined, 6);
