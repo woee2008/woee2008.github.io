@@ -28,5 +28,10 @@ const dog = {
 const el = document.getElementById("code-block");
 el.innerText = JSON.stringify(dog, undefined, 6);
 
+const textBox = document.getElementById("textbox");
+
 const square = document.querySelector('.box-ex');
-square.style.backgroundColor = "crimson";
+
+textBox.addEventListener("change", function () {
+    square.style.backgroundColor = textBox.value;
+});
