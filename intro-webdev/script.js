@@ -27,3 +27,6 @@ const dog = {
 
 const el = document.getElementById("code-block");
 el.innerText = JSON.stringify(dog, undefined, 6);
+
+const square = document.querySelector('.box-ex');
+square.style.backgroundColor = "crimson";
