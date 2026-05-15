@@ -25,7 +25,7 @@ const dog = {
   },
 };
 
-const el = document.getElementById("code-block");
+const el = document.getElementsByClassName("code-block");
 el.innerText = JSON.stringify(dog, undefined, 6);
 
 const colorInput = document.getElementById("textbox");
