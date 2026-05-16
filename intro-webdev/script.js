@@ -29,6 +29,13 @@ const dog = {
 const el = document.getElementsByClassName("code-block");
 el.innerText = JSON.stringify(dog, undefined, 6);
 
+const textBox = document.getElementById("textbox");
+const squareBox = document.getElementsByClassName("Colorbox");
+
+textBox.addEventListener("change", function () {
+        squareBox.style.backgroundColor = textBox.value;
+    });
+
 //code on colorbox starts here
 
 const colorInput = document.getElementById("textbox");
