@@ -36,8 +36,8 @@ el.innerText = JSON.stringify(dog, undefined, 6);
 
 
 //code on colorbox starts here
-const textBox = document.getElementById("textbox");
 const squareBox = document.getElementsByClassName("Colorbox");
+const textBox = document.getElementById("textbox");
 
 textBox.addEventListener("change", function () {
         squareBox.style.backgroundColor = textBox.value;
