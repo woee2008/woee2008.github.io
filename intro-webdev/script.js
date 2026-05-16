@@ -29,6 +29,13 @@ const dog = {
 const el = document.getElementsByClassName("code-block");
 el.innerText = JSON.stringify(dog, undefined, 6);
 
+
+
+
+
+
+
+//code on colorbox starts here
 const textBox = document.getElementById("textbox");
 const squareBox = document.getElementsByClassName("Colorbox");
 
@@ -36,15 +43,17 @@ textBox.addEventListener("change", function () {
         squareBox.style.backgroundColor = textBox.value;
     });
 
-//code on colorbox starts here
 
-const colorInput = document.getElementById("textbox");
 
-const squareBox = document.getElementsByClassName('.Colorbox');
 
-colorInput.addEventListener("change", function () {
-    squareBox.style.backgroundColor = colorInput.value;
-});
+
+
+
+
+
+
+
+
 
 // code on the wordle game
 const ANSWER_LENGTH = 5;
