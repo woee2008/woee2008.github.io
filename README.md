@@ -1,2 +1,2 @@
 # hello
-### [HERE](portfolio/index.html)
+### [HERE](./portfolio/index.html)
