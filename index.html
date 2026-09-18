@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IdeaBridge</title>
+<style>
+
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#eef8f6;color:#163b38}
+.app{max-width:430px;margin:auto;min-height:100vh;background:#fff;position:relative;overflow:hidden}
+header{padding:22px 20px 10px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:25px;font-weight:800}.logo span{color:#10a98f}
+.screen{display:none;padding:12px 20px 90px}.screen.active{display:block}
+h1{font-size:28px;margin:18px 0 8px} h2{font-size:21px;margin:18px 0 10px}
+p{color:#607775;line-height:1.45}
+.hero{margin:18px 0;padding:25px;border-radius:22px;background:linear-gradient(135deg,#dff8f1,#effcf9)}
+.hero .bulb{font-size:55px}.tag{display:inline-block;padding:7px 11px;border-radius:20px;background:#e4f7f2;color:#087d6b;font-size:12px;font-weight:700;margin:4px}
+button{border:0;border-radius:13px;padding:13px 17px;font-weight:700;cursor:pointer}
+.primary{background:#0c9f87;color:white;width:100%}.secondary{background:#eaf5f3;color:#087d6b}
+input,textarea,select{width:100%;padding:13px;margin:7px 0 12px;border:1px solid #d7e7e4;border-radius:12px;font-size:14px}
+textarea{height:85px;resize:none}
+.card{border:1px solid #e1eeec;border-radius:17px;padding:15px;margin:12px 0;background:#fff;box-shadow:0 4px 15px #123b3810}
+.idea-title{font-size:17px;font-weight:800;margin-bottom:6px}.small{font-size:12px;color:#718482}
+.search{background:#f4f8f7;border:0}
+.account{padding:17px;border-radius:17px;margin:12px 0;cursor:pointer;border:1px solid #e3efed}
+.account strong{display:block;margin-bottom:5px}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:430px;width:100%;background:#fff;border-top:1px solid #e4eeee;display:flex;justify-content:space-around;padding:10px 5px;z-index:5}
+.nav button{background:none;color:#70827f;font-size:11px;padding:7px}
+.nav button.active{color:#0b9d86}
+.back{background:none;padding:5px 0;color:#087d6b}
+.msg{padding:10px 13px;border-radius:14px;margin:8px 0;max-width:82%;background:#f0f5f4}.me{margin-left:auto;background:#dff7f0}
+.toast{position:fixed;bottom:78px;left:50%;transform:translateX(-50%);background:#173d39;color:#fff;padding:12px 18px;border-radius:12px;display:none;z-index:10}
+
+</style>
+</head>
+<body>
+<div class="app">
+
+<div id="welcome" class="screen active">
+  <div class="hero" style="margin-top:55px;text-align:center">
+    <div class="bulb">💡</div>
+    <div class="logo">Idea<span>Bridge</span></div>
+    <h2>Connect Ideas with Opportunities</h2>
+    <p>Share your idea. Find funding, mentors, teams and meaningful connections.</p>
+    <button class="primary" onclick="show('accounts')">Get Started →</button>
+  </div>
+</div>
+
+<div id="accounts" class="screen">
+  <button class="back" onclick="show('welcome')">← Back</button>
+  <h1>Welcome to <span class="logo">Idea<span>Bridge</span></span></h1>
+  <p>Choose your account type</p>
+  <div class="account" onclick="show('home')">👤 <strong>Idea Creator</strong><span class="small">Share ideas and find the right support</span></div>
+  <div class="account" onclick="show('home')">💰 <strong>Investor</strong><span class="small">Discover promising ideas</span></div>
+  <div class="account" onclick="show('home')">🧑‍🏫 <strong>Mentor</strong><span class="small">Guide new innovators</span></div>
+  <div class="account" onclick="show('home')">🏢 <strong>Company</strong><span class="small">Collaborate and build the future</span></div>
+</div>
+
+<div id="home" class="screen">
+<header><div class="logo">Idea<span>Bridge</span></div><div>🔔 👤</div></header>
+<p>Hello, Innovator 👋</p>
+<input class="search" placeholder="🔍 Search ideas, people or skills">
+<div class="hero"><h2>Have an idea?</h2><p>Share it with the world and get the right connections.</p><button class="secondary" onclick="show('post')">Post Your Idea +</button></div>
+<h2>Browse by Category</h2>
+<div><span class="tag">Technology</span><span class="tag">Business</span><span class="tag">Education</span><span class="tag">Healthcare</span><span class="tag">Environment</span><span class="tag">Fashion</span></div>
+<h2>Trending Ideas</h2>
+<div class="card" onclick="show('details')"><div class="idea-title">🌱 Eco-Friendly Fashion</div><p>Turning old clothes into sustainable fashion products.</p><span class="tag">Funding</span><span class="tag">Designer</span></div>
+</div>
+
+<div id="post" class="screen">
+<button class="back" onclick="show('home')">← Back</button>
+<h1>Post Your Idea</h1>
+<label>Idea Name</label><input id="iname" placeholder="e.g. Eco-friendly Fashion Brand">
+<label>Problem</label><textarea id="problem" placeholder="What problem does your idea solve?"></textarea>
+<label>Your Solution</label><textarea placeholder="How does your idea work?"></textarea>
+<label>Description</label><textarea placeholder="Tell us more about your idea..."></textarea>
+<label>What do you need?</label>
+<div><span class="tag">☐ Funding</span><span class="tag">☐ Mentor</span><span class="tag">☐ Team</span><span class="tag">☐ Connections</span></div><br>
+<button class="primary" onclick="publish()">Publish Idea</button>
+</div>
+
+<div id="explore" class="screen">
+<h1>Explore Ideas</h1><input class="search" placeholder="🔍 Search ideas...">
+<div class="card" onclick="show('details')"><div class="idea-title">Eco-Friendly Fashion</div><p>Turning old clothes into sustainable fashion products.</p><span class="tag">Funding + Designer</span><div class="small">❤️ 124 &nbsp; 💬 36</div></div>
+<div class="card"><div class="idea-title">🤖 AI Study Buddy</div><p>An AI tool helping students learn better and smarter.</p><span class="tag">Funding + Mentor</span><div class="small">❤️ 98 &nbsp; 💬 29</div></div>
+<div class="card"><div class="idea-title">🌾 Smart Farming Solution</div><p>IoT-based system for better crop monitoring.</p><span class="tag">Funding + Team</span><div class="small">❤️ 76 &nbsp; 💬 18</div></div>
+</div>
+
+<div id="details" class="screen">
+<button class="back" onclick="show('explore')">← Back</button>
+<div class="hero"><div style="font-size:42px">👗🌱</div><h1>Eco-Friendly Fashion</h1><p>Turning old clothes into sustainable fashion products.</p></div>
+<span class="tag">Fashion</span><span class="tag">Environment</span>
+<h2>What I'm Looking For</h2><span class="tag">💰 Funding</span><span class="tag">🎨 Fashion Designer</span>
+<h2>About the Idea</h2><p>We plan to create sustainable fashion products by recycling old clothes and giving them a new life. Our goal is to reduce textile waste and promote eco-friendly fashion.</p>
+<h2>Required Funding</h2><p><strong>₹5,00,000</strong> &nbsp; • &nbsp; 30% funded</p>
+<button class="secondary" onclick="show('chat')">Message</button>
+<button class="primary" style="margin-top:8px" onclick="connect()">Connect</button>
+</div>
+
+<div id="connect" class="screen">
+<h1>Connections</h1>
+<div class="card"><div class="idea-title">Rahul Mehta</div><p>💰 Investor • Interested in your Eco-Friendly Fashion idea.</p><button class="primary" onclick="show('chat')">Message</button></div>
+<div class="card"><div class="idea-title">Ananya Krishnan</div><p>🎨 Fashion Designer • Would like to collaborate.</p><button class="primary" onclick="show('chat')">Message</button></div>
+<div class="card"><div class="idea-title">Vikram S</div><p>🧑‍🏫 Mentor • Can guide you on business strategy.</p><button class="primary" onclick="show('chat')">Message</button></div>
+</div>
+
+<div id="chat" class="screen">
+<button class="back" onclick="show('connect')">← Back</button><h1>Rahul Mehta</h1><p>Investor • Online</p>
+<div class="msg">Hi! I came across your Eco-Friendly Fashion idea. It’s really interesting!</div>
+<div class="msg">Would love to know more about your plans and funding needs.</div>
+<div class="msg me">Thank you so much! I'm happy to share more details. I can send you my full pitch deck.</div>
+<input placeholder="Type a message..." onkeydown="if(event.key==='Enter'){alert('Message sent!')}">
+</div>
+
+<div id="profile" class="screen">
+<h1>My Profile</h1>
+<div class="hero" style="text-align:center"><div style="font-size:55px">👩🏻</div><h2>Shresanya</h2><p>Idea Creator • Ernakulam, Kerala</p></div>
+<div class="card"><strong>12</strong> Ideas &nbsp;&nbsp; <strong>8</strong> Connections &nbsp;&nbsp; <strong>4</strong> Followers</div>
+<h2>My Ideas</h2><div class="card"><div class="idea-title">Eco-Friendly Fashion</div><span class="tag">30% funded</span></div>
+</div>
+
+<div class="nav" id="nav" style="display:none">
+<button onclick="show('home')">⌂<br>Home</button>
+<button onclick="show('explore')">⌕<br>Explore</button>
+<button onclick="show('post')">＋<br>Post</button>
+<button onclick="show('connect')">♧<br>Connect</button>
+<button onclick="show('profile')">♙<br>Profile</button>
+</div>
+<div id="toast" class="toast">Connection request sent!</div>
+</div>
+
+<script>
+const screens=['welcome','accounts','home','post','explore','details','connect','chat','profile'];
+function show(id){
+  screens.forEach(s=>document.getElementById(s).classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('nav').style.display=['welcome','accounts'].includes(id)?'none':'flex';
+  window.scrollTo(0,0);
+}
+function connect(){
+  document.getElementById('toast').style.display='block';
+  setTimeout(()=>document.getElementById('toast').style.display='none',1800);
+  show('connect');
+}
+function publish(){
+  const n=document.getElementById('iname').value || 'My New Idea';
+  alert('“'+n+'” has been published successfully in this prototype!');
+  show('explore');
+}
+</script>
+</body>
+</html>
