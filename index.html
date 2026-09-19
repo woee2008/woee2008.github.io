@@ -24,6 +24,7 @@ textarea{height:85px;resize:none}
 .search{background:#f4f8f7;border:0}
 .account{padding:17px;border-radius:17px;margin:12px 0;cursor:pointer;border:1px solid #e3efed}
 .account strong{display:block;margin-bottom:5px}
+.role-name{color:#087d6b;font-weight:700}
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);max-width:430px;width:100%;background:#fff;border-top:1px solid #e4eeee;display:flex;justify-content:space-around;padding:10px 5px;z-index:5}
 .nav button{background:none;color:#70827f;font-size:11px;padding:7px}
 .nav button.active{color:#0b9d86}
@@ -50,15 +51,24 @@ textarea{height:85px;resize:none}
   <button class="back" onclick="show('welcome')">← Back</button>
   <h1>Welcome to <span class="logo">Idea<span>Bridge</span></span></h1>
   <p>Choose your account type</p>
-  <div class="account" onclick="show('home')">👤 <strong>Idea Creator</strong><span class="small">Share ideas and find the right support</span></div>
-  <div class="account" onclick="show('home')">💰 <strong>Investor</strong><span class="small">Discover promising ideas</span></div>
-  <div class="account" onclick="show('home')">🧑‍🏫 <strong>Mentor</strong><span class="small">Guide new innovators</span></div>
-  <div class="account" onclick="show('home')">🏢 <strong>Company</strong><span class="small">Collaborate and build the future</span></div>
+  <div class="account" onclick="chooseRole('Idea Creator')">👤 <strong>Idea Creator</strong><span class="small">Share ideas and find the right support</span></div>
+  <div class="account" onclick="chooseRole('Investor')">💰 <strong>Investor</strong><span class="small">Discover promising ideas</span></div>
+  <div class="account" onclick="chooseRole('Mentor')">🧑‍🏫 <strong>Mentor</strong><span class="small">Guide new innovators</span></div>
+  <div class="account" onclick="chooseRole('Company')">🏢 <strong>Company</strong><span class="small">Collaborate and build the future</span></div>
+</div>
+
+<div id="login" class="screen">
+  <button class="back" onclick="show('accounts')">← Back</button>
+  <h1>Login</h1>
+  <p>Continue as <span id="loginRole" class="role-name">Idea Creator</span></p>
+  <label>Email</label><input id="loginEmail" type="email" placeholder="you@example.com">
+  <label>Password</label><input id="loginPassword" type="password" placeholder="Enter password">
+  <button class="primary" onclick="login()">Login →</button>
 </div>
 
 <div id="home" class="screen">
 <header><div class="logo">Idea<span>Bridge</span></div><div>🔔 👤</div></header>
-<p>Hello, Innovator 👋</p>
+<p id="homeGreeting">Hello, Innovator 👋</p>
 <input class="search" placeholder="🔍 Search ideas, people or skills">
 <div class="hero"><h2>Have an idea?</h2><p>Share it with the world and get the right connections.</p><button class="secondary" onclick="show('post')">Post Your Idea +</button></div>
 <h2>Browse by Category</h2>
@@ -114,7 +124,7 @@ textarea{height:85px;resize:none}
 
 <div id="profile" class="screen">
 <h1>My Profile</h1>
-<div class="hero" style="text-align:center"><div style="font-size:55px">👩🏻</div><h2>Shresanya</h2><p>Idea Creator • Ernakulam, Kerala</p></div>
+<div class="hero" style="text-align:center"><div style="font-size:55px">👩🏻</div><h2>Shresanya</h2><p><span id="profileRole">Idea Creator</span> • Ernakulam, Kerala</p></div>
 <div class="card"><strong>12</strong> Ideas &nbsp;&nbsp; <strong>8</strong> Connections &nbsp;&nbsp; <strong>4</strong> Followers</div>
 <h2>My Ideas</h2><div class="card"><div class="idea-title">Eco-Friendly Fashion</div><span class="tag">30% funded</span></div>
 </div>
@@ -130,12 +140,23 @@ textarea{height:85px;resize:none}
 </div>
 
 <script>
-const screens=['welcome','accounts','home','post','explore','details','connect','chat','profile'];
+const screens=['welcome','accounts','login','home','post','explore','details','connect','chat','profile'];
+let selectedRole='Idea Creator';
 function show(id){
   screens.forEach(s=>document.getElementById(s).classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  document.getElementById('nav').style.display=['welcome','accounts'].includes(id)?'none':'flex';
+  document.getElementById('nav').style.display=['welcome','accounts','login'].includes(id)?'none':'flex';
   window.scrollTo(0,0);
+}
+function chooseRole(role){
+  selectedRole=role;
+  document.getElementById('loginRole').textContent=role;
+  show('login');
+}
+function login(){
+  document.getElementById('homeGreeting').textContent='Hello, '+selectedRole+' 👋';
+  document.getElementById('profileRole').textContent=selectedRole;
+  show('home');
 }
 function connect(){
   document.getElementById('toast').style.display='block';
